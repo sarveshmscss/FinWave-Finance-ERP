@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cash Management Form</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='favicon.png') }}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/vendor/quill/quill.snow.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link href="{{ url_for('static', filename='assets/css/style.css') }}" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: 'Times New Roman', Times, serif;
+            margin: 0;
+        }
+        #header {
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            height: 60px;
+        }
+        .header-content {
+            flex-grow: 1;
+            text-align: center;
+            font-size: 1.5rem;
+            color: #333;
+        }
+        #sidebar {
+            width: 250px;
+            position: fixed;
+            height: 100%;
+            background: #f8f9fa;
+            overflow: hidden;
+            top: 60px; 
+            bottom: 0;
+        }
+        .sidebar-nav {
+            padding-top: 20px;
+        }
+        .form-wrapper {
+            margin-left: 250px; 
+            padding: 20px;
+            margin-top: 60px; 
+        }
+        .form-wrapper form {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            
+        }
+        .form-wrapper h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+        button[type=submit] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+        }
+        button[type=submit]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header id="header" class="header">
+        <div class="d-flex align-items-center">
+            <a href="#" class="logo d-flex align-items-center">
+                <img src="{{ url_for('static', filename='assets/img/logo.png') }}" alt="">
+                <span class="d-none d-lg-block ms-2">FinWave-ERP</span>
+            </a>
+        </div>
+        <div class="header-content">
+            Cash Management Form
+        </div>
+    </header>
+
+    <aside id="sidebar" class="sidebar">
+        <ul class="sidebar-nav" id="sidebar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('index') }}">
+                    <i class="bi bi-grid"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-heading">Finance Modules</li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ url_for('finance_general_ledger') }}">
+                    <i class="bi bi-journal-text"></i>
+                    <span>General Ledger</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ url_for('finance_accounts_payable') }}">
+                    <i class="bi bi-journal-text"></i>
+                    <span>Accounts Payable</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ url_for('finance_accounts_receivable') }}">
+                    <i class="bi bi-journal-text"></i>
+                    <span>Accounts Receivable</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ url_for('finance_cash_management') }}">
+                    <i class="bi bi-journal-text"></i>
+                    <span>Cash Management</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ url_for('accounts_payable_form') }}">
+                    <i class="bi bi-journal-text"></i>
+                    <span>Accounts Payable Form</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ url_for('accounts_receivable_form') }}">
+                    <i class="bi bi-journal-text"></i>
+                    <span>Accounts Receivable Form</span>
+                </a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ url_for('messages') }}">
+                    <i class="bi bi-journal-text"></i>
+                    <span>Notifications</span>
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <div class="form-wrapper">
+        <form action="{{ url_for('add_cash_management') }}" method="post">
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" id="date" name="date" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" id="description" name="description" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="cash_inflow">Cash Inflow</label>
+                <input type="number" step="0.01" id="cash_inflow" name="cash_inflow" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="cash_outflow">Cash Outflow</label>
+                <input type="number" step="0.01" id="cash_outflow" name="cash_outflow" class="form-control" required>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

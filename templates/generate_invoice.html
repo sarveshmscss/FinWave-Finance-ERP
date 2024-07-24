@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Invoice</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .invoice-container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 30px;
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .invoice-info {
+            padding: 20px;
+            background: #f4f4f4;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .invoice-info p {
+            font-size: 1.1rem;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .invoice-info strong {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+        .text-center {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="invoice-container">
+            <h1>Invoice</h1>
+            <div class="invoice-info">
+                <p><strong>Date:</strong> {{ invoice.date }}</p>
+                <p><strong>Description:</strong> {{ invoice.description }}</p>
+                <p><strong>Amount:</strong> ${{ invoice.amount }}</p>
+                <p><strong>Customer:</strong> {{ invoice.customer }}</p>
+                <p><strong>Due Date:</strong> {{ invoice.due_date }}</p>
+                <p><strong>Invoice Id:</strong> {{ invoice.invoice_id }}</p>
+            </div>
+            <div class="text-center">
+                <a href="{{ url_for('finance_accounts_receivable') }}" class="btn btn-primary">Back to Accounts Receivable</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

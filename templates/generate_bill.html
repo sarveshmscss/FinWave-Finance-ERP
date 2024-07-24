@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Bill</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .bill-container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 30px;
+            background: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        .bill-info {
+            margin-bottom: 20px;
+        }
+        .bill-info p {
+            font-size: 1.1rem;
+            margin: 10px 0;
+        }
+        .bill-info strong {
+            font-weight: bold;
+            color: #555;
+        }
+        .bill-info {
+            padding: 20px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .bill-info p {
+            font-size: 1.1rem;
+            color: #333;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="bill-container">
+            <h1>Bill</h1>
+            <div class="bill-info">
+                <p><strong>Date:</strong> {{ bill.ap_date }}</p>
+                <p><strong>Description:</strong> {{ bill.description }}</p>
+                <p><strong>Amount:</strong> ${{ bill.amount }}</p>
+                <p><strong>Vendor:</strong> {{ bill.vendor }}</p>
+                <p><strong>Due Date:</strong> {{ bill.due_date }}</p>
+            </div>
+            <div class="text-center">
+                <a href="{{ url_for('finance_accounts_payable') }}" class="btn btn-primary">Back to Accounts Payable</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

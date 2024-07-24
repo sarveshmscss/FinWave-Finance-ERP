@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinWave-ERP/Register</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Nunito|Poppins" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/css/style.css') }}" rel="stylesheet">
+    <style>
+        .register {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .already-have-account {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <div class="container">
+        <section class="section register">
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-6">
+                    <div class="d-flex justify-content-center py-4">
+                        <a href="#" class="logo d-flex align-items-center w-auto">
+                            <img src="{{ url_for('static', filename='assets/img/logo.png') }}" alt="">
+                            <span class="d-none d-lg-block">FinWave-ERP</span>
+                        </a>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="pt-4 pb-2">
+                                <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
+                                <p class="text-center small">Enter your personal details to create an account</p>
+                            </div>
+                            <form class="row g-3 needs-validation" novalidate method="POST" action="{{ url_for('create_user') }}">
+                                <div class="col-12">
+                                    <label for="yourName" class="form-label">Your Name</label>
+                                    <input type="text" name="name" class="form-control" id="yourName" required>
+                                    <div class="invalid-feedback">Please enter your name!</div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="yourEmail" class="form-label">Your Email</label>
+                                    <input type="email" name="email" class="form-control" id="yourEmail" required>
+                                    <div class="invalid-feedback">Please enter a valid email address!</div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="yourUsername" class="form-label">Company Name</label>
+                                    <div class="input-group has-validation">
+                                        <span class="input-group-text" id="inputGroupPrepend">@</span>
+                                        <input type="text" name="username" class="form-control" id="yourUsername" required>
+                                        <div class="invalid-feedback">Please choose a username.</div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="yourPassword" class="form-label">Password</label>
+                                    <input type="password" name="password" class="form-control" id="yourPassword" required>
+                                    <div class="invalid-feedback">Please enter your password!</div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
+                                        <label class="form-check-label" for="acceptTerms">I agree and accept the <a href="{{ url_for('terms_and_conditions') }}">Terms & Conditions</a></label>
+                                        <div class="invalid-feedback">You must agree before submitting.</div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn btn-primary w-100" type="submit">Register</button>
+                                </div>
+                                <div class="col-12 already-have-account">
+                                    <p class="small mb-0">Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<script src="{{ url_for('static', filename='assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+</body>
+</html>
