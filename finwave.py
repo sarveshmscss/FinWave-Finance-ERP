@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash
-import mysql.connector
+from flask import Flask, render_template, request, redirect, url_for, session, flash 
+import mysql.connector 
 from decimal import Decimal
 from datetime import datetime
 import logging
