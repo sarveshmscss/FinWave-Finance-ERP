@@ -305,45 +305,6 @@ def finance_cash_management():
     except mysql.connector.Error as err:
         print(f"Error fetching cash management data: {err}")
         return "Error fetching data"
-    
-def get_due_dates():
-    try:
-        conn = mysql.connector.connect(**db_config)
-        cursor = conn.cursor(dictionary=True)
-
-        query = """
-        SELECT 'Accounts Payable' AS type, due_date, description AS details
-        FROM accounts_payable
-        UNION ALL
-        SELECT 'Accounts Receivable' AS type, due_date, description AS details
-        FROM accounts_receivable
-        """
-        cursor.execute(query)
-        results = cursor.fetchall()
-        cursor.close()
-        conn.close()
-
-        today = datetime.now().date()
-        notifications = []
-        for row in results:
-            due_date = row['due_date'].date() if row['due_date'] else None
-            if due_date is not None:
-                notifications.append({
-                    'type': row['type'],
-                    'due_date': due_date.isoformat(),
-                    'details': row['details'],
-                    'past_due': due_date < today
-                })
-
-        return notifications
-    except mysql.connector.Error as err:
-        print(f"Error fetching due dates: {err}")
-        return []
-
-@app.route('/notifications')
-def notifications():
-    notifications = get_due_dates()
-    return render_template('messages.html', notifications=notifications)
 
 @app.route('/generate_bill/<int:bill_id>')
 def generate_bill(bill_id):
@@ -408,4 +369,4 @@ def generate_invoice(invoice_id):
         return f"Error fetching data: {err}"
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000)
